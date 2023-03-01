@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+#canvasContainer{
+    border: 2px solid black;
+    margin:auto;
+    width:722px;
+    height:407px;
+    margin-top: 10%;
+}
+</style>
+</head>
+<body onload="startGame()">
+    <div id="canvasContainer"></div>
+    <button onclick="hardReset()">reset</button>
+<script>
+
+var player1;
+var player2;
+
+const container = document.getElementById("canvasContainer");
+
+function startGame() {
+    myGameArea.start();
+
+
+    player1 = new component(40, 40, "red", 10, myGameArea.canvas.height-90, 'player1');
+    player2 = new component(40, 40, "blue", myGameArea.canvas.width-50, myGameArea.canvas.height-90, 'player2');
+}
+//const playAreaSize = myGameArea.canvas.width/4;
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 720;
+        this.canvas.height = 405;
+        this.context = this.canvas.getContext("2d");
+        //document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        container.appendChild(this.canvas);
+        this.interval = setInterval(updateGameArea, 20);
+        window.addEventListener('keydown', function (e) {
+            myGameArea.keys = (myGameArea.keys || []);
+            myGameArea.keys[e.keyCode] = (e.type == "keydown");
+        })
+        window.addEventListener('keyup', function (e) {
+            myGameArea.keys[e.keyCode] = (e.type == "keydown");         
+        })
+        window.addEventListener('keypress', function (e){ //these functions are for player 1 and 2's shooting ability
+            
+            if(myGameArea.keys[90])
+            {
+                console.log("key is pressed");
+                player1Shoot();
+                myGameArea.keys[90] = false;
+            }
+            if(myGameArea.keys[191]){
+                player2Shoot();
+                myGameArea.keys[191] = false;
+            }
+
+         //  if(myGameArea.keys[38]){
+           //     console.log("up arrow is pressed");
+            //    player2Jump(-6.6);
+           // }
+
+            if(myGameArea.keys[87]){
+                player1Jump(-6.6);
+            }
+            
+        })
+        window.addEventListener('keydown', function (e){ //these functions are for player 1 and 2's shooting ability
+        
+        if(myGameArea.keys[38]){
+                myGameArea.keys[38] = false;
+                console.log("up arrow is pressed");
+                player2Jump(-6.6);
+            }
+
+           // if(myGameArea.keys[87]){
+            //    player1Jump(-6.6);
+            //}
+            
+        })
+    }, 
+    clear : function(){
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y, id) {
+    
+    this.gamearea = myGameArea;
+
+    this.width = width;
+    this.height = height;
+
+    this.speedX = 0;
+    this.speedY = 0; 
+
+    this.jumpAmount = 2;
+    this.gravity = 0.2;
+    this.gravitySpeed = 0;
+
+    this.x = x;
+    this.y = y;  
+
+    this.id = id;
+
+    this.quiver = new Array();
+    this.quiverMax = 3;
+
+    //This boolean is for the
+    this.hasNotHitPlayer = true;
+
+    this.update = function() {
+        ctx = myGameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    this.newPos = function() {
+        this.gravitySpeed += this.gravity;
+        if(this.id === 'player1' || this.id === 'player2'){
+            this.y += this.speedY + this.gravitySpeed; 
+        }
+        this.x += this.speedX;
+        this.hitBottom();            
+    }    
+    this.hitBottom = function() {
+        var rockbottom = myGameArea.canvas.height - this.height;
+        if (this.y > rockbottom && (this.id === 'player1' || this.id === 'player2')) {
+            this.y = rockbottom;
+            this.gravitySpeed = 0;
+            this.jumpAmount = 2;
+        }
+    }
+}
+
+
+function player1Shoot(){
+    console.log("P1 spear created");
+        if(myGameArea.keys[90] && player1.quiver.length != player1.quiverMax){
+            player1.quiver.push(new component(50, 15, "red", (player1.x+player1.width), (player1.y+5)));
+            player1.quiver[(player1.quiver.length)-1].speedX = 13;
+        }
+        else{
+            console.log('p1 spears are maxed');
+        }
+}
+
+function player2Shoot(){
+    console.log("P2 spear created");
+        if(myGameArea.keys[191] && player2.quiver.length != player2.quiverMax){
+            player2.quiver.push(new component(50, 15, "blue", (player2.x+player2.width), (player2.y+5)));
+            player2.quiver[(player2.quiver.length)-1].speedX = -13;
+        }
+        else{
+            console.log('p2 spears are maxed');
+        }
+}
+
+function player1Jump(jumpHeight){
+    if(player1.jumpAmount > 0){
+    	player1.jumpAmount -= 1;
+    	player1.gravitySpeed = jumpHeight;
+    }
+
+}
+
+function player2Jump(jumpHeight){
+    if(player2.jumpAmount > 0){
+    	player2.jumpAmount -= 1;
+    	player2.gravitySpeed = jumpHeight;
+    }
+}
+
+function player1HitBox(positionX, positionY, i){
+    if(positionX >= player1.x && positionY >= player1.y && positionY <= player1.y + player1.height && positionX <= player1.x + player1.width && player2.quiver[i].hasNotHitPlayer){
+        player2.quiver[i].hasNotHitPlayer = false;
+        console.log("player1 is hit");
+    }
+
+}
+
+function player2HitBox(positionX, positionY, i){
+    if(positionX >= player2.x && positionY >= player2.y && positionY <= player2.y + player2.height && positionX <= player2.x + player2.width && player1.quiver[i].hasNotHitPlayer){
+        player1.quiver[i].hasNotHitPlayer = false;
+        console.log("player2 is hit");
+    }
+
+}
+
+function hardReset(){
+    location.reload();
+}
+
+function resetRound(){
+    myGameArea.clear();
+    player1.x = 10;
+    player1.y = myGameArea.canvas.height-90;
+    player2.x = myGameArea.canvas.width-50;
+    player2.y = myGameArea.canvas.width-90;
+
+}
+
+
+function updateGameArea() {
+    let playAreaSize = myGameArea.canvas.width/4;
+    myGameArea.clear();
+    player1.speedX = 0;
+    player1.speedY = 0; 
+    player2.speedX = 0;
+    player2.speedY = 0; 
+    //player 1 movement
+    if ((myGameArea.keys && myGameArea.keys[65]) && player1.x != 8) {player1.speedX = -2; }
+    if ((myGameArea.keys && myGameArea.keys[68]) && player1.x != playAreaSize+8) {player1.speedX = 2; }
+    //player 2 movement
+    if ((myGameArea.keys && myGameArea.keys[37]) && player2.x != myGameArea.canvas.width-playAreaSize-48) {player2.speedX = -2;}
+    if ((myGameArea.keys && myGameArea.keys[39]) && player2.x != myGameArea.canvas.width-48) {player2.speedX = 2; }
+    
+    //player 1 spear function
+    //if(myGameArea.keys && myGameArea.keys[90])
+    //{
+        
+    //}
+
+    //player 2 spear function
+    //if(myGameArea.keys && myGameArea.keys[191])
+    //{
+    //    player2spear = new component(50, 15, "blue", (player2.x), (player2.y+5));
+    //    player2spear.speedX = -13;
+    //}
+
+    player1.newPos();    
+    player1.update();
+    player2.newPos();    
+    player2.update();
+
+    for(let i = 0; i<player1.quiver.length; i++){
+
+        player2HitBox(player1.quiver[i].x, player1.quiver[i].y, i);
+        player2HitBox(player1.quiver[i].x, player1.quiver[i].y + player1.quiver[i].height, i);
+        player2HitBox(player1.quiver[i].x + player1.quiver[i].width, player1.quiver[i].y, i);
+        player2HitBox(player1.quiver[i].x + player1.quiver[i].width, player1.quiver[i].y + player1.quiver[i].height, i);
+
+
+        if(!(player1.quiver[i].x > 770)){
+            player1.quiver[i].newPos();
+            player1.quiver[i].update();
+        }
+        else{
+            player1.quiver.splice(i, 1);
+        }
+    }
+
+    for(let i = 0; i<player2.quiver.length; i++){
+
+        player1HitBox(player2.quiver[i].x, player2.quiver[i].y, i);
+        player1HitBox(player2.quiver[i].x, player2.quiver[i].y + player2.quiver[i].height, i);
+        player1HitBox(player2.quiver[i].x + player2.quiver[i].width, player2.quiver[i].y, i);
+        player1HitBox(player2.quiver[i].x + player2.quiver[i].width, player2.quiver[i].y + player2.quiver[i].height, i);
+
+        if(!(player2.quiver[i].x < -50)){
+            player2.quiver[i].newPos();
+            player2.quiver[i].update();
+        }
+        else{
+            player2.quiver.splice(i,1);
+        }
+    }
+}
+</script>
+</body>
+</html>
