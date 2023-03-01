@@ -109,6 +109,9 @@ function component(width, height, color, x, y, id) {
     this.x = x;
     this.y = y;  
 
+    this.originalX = x;
+    this.originalY = y;
+
     this.id = id;
 
     this.quiver = new Array();
@@ -200,10 +203,10 @@ function hardReset(){
 
 function resetRound(){
     myGameArea.clear();
-    player1.x = 10;
-    player1.y = myGameArea.canvas.height-90;
-    player2.x = myGameArea.canvas.width-50;
-    player2.y = myGameArea.canvas.width-90;
+    player1.x = player1.originalX;
+    player1.y = player1.originalY;
+    player2.x = player2.originalX;
+    player2.y = player2.originalY;
 
 }
 
