@@ -19,6 +19,7 @@ canvas {
     <div id="canvasContainer"></div>
     <button id= "startButton" onclick="startGame()">start</button>
     <button onclick="hardReset()">reset</button>
+    <button id= "resetRound"  onclick="resetRound()">reset round</button>
 <script>
 
 var player1;
@@ -26,6 +27,8 @@ var player2;
 var player1Platform;
 var player2Platform;
 var playerMovement = true;
+var resetRoundButtonId = document.getElementById("resetRound");
+resetRoundButtonId.style.display = "none";
 
 const container = document.getElementById("canvasContainer");
 
@@ -206,6 +209,7 @@ function player1HitBox(positionX, positionY, i){
     }
     if(player1.currentHealth <= 0){
         playerMovement = false;
+        resetRoundButtonId.style.display = "block";
     }
 
 }
@@ -218,6 +222,7 @@ function player2HitBox(positionX, positionY, i){
     }
     if(player2.currentHealth <= 0){
         playerMovement = false;
+        resetRoundButtonId.style.display = "block";
     }
 
 }
@@ -235,6 +240,7 @@ function resetRound(){
     player2.y = player2.originalY;
     player2.currentHealth = player2.maxHealth;
     playerMovement = true;
+    resetRoundButtonId.style.display = "none";
 
 }
 
