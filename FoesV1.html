@@ -15,8 +15,9 @@ canvas {
 }
 </style>
 </head>
-<body onload="startGame()">
+<body onload="startScreen()">
     <div id="canvasContainer"></div>
+    <button id= "startButton" onclick="startGame()">start</button>
     <button onclick="hardReset()">reset</button>
 <script>
 
@@ -27,8 +28,15 @@ var player2Platform;
 
 const container = document.getElementById("canvasContainer");
 
-function startGame() {
+function startScreen(){
     myGameArea.start();
+}
+
+function startGame() {
+    //myGameArea.start();
+
+    var hidden = document.getElementById("startButton");
+    hidden.style.display = "none";
 
 
     player1 = new component(40, 40, "red", 10, myGameArea.canvas.height-90, 'player1');
