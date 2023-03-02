@@ -28,7 +28,7 @@ const powerupList = [
         effect: function(player){
             player.jumpAmount += 1;
         }
-    },
+    }
 ];
 
 //powerupList[0].effect(player1); //As an example, this 
