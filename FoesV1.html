@@ -118,6 +118,9 @@ function component(width, height, color, x, y, id) {
     this.gravity = 0.2;
     this.gravitySpeed = 0;
 
+    this.maxHealth = 2;
+    this.currentHealth = this.maxHealth;
+
     this.x = x;
     this.y = y;  
 
@@ -198,6 +201,7 @@ function player1HitBox(positionX, positionY, i){
     if(positionX >= player1.x && positionY >= player1.y && positionY <= player1.y + player1.height && positionX <= player1.x + player1.width && player2.quiver[i].hasNotHitPlayer){
         player2.quiver[i].hasNotHitPlayer = false;
         console.log("player1 is hit");
+        player1.currentHealth -= 1;
     }
 
 }
@@ -206,6 +210,7 @@ function player2HitBox(positionX, positionY, i){
     if(positionX >= player2.x && positionY >= player2.y && positionY <= player2.y + player2.height && positionX <= player2.x + player2.width && player1.quiver[i].hasNotHitPlayer){
         player1.quiver[i].hasNotHitPlayer = false;
         console.log("player2 is hit");
+        player2.currentHealth -= 1;
     }
 
 }
@@ -218,8 +223,10 @@ function resetRound(){
     myGameArea.clear();
     player1.x = player1.originalX;
     player1.y = player1.originalY;
+    player1.currentHealth = player1.maxHealth;
     player2.x = player2.originalX;
     player2.y = player2.originalY;
+    player2.currentHealth = player2.maxHealth;
 
 }
 
