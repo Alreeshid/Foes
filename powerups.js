@@ -8,11 +8,27 @@ function powerup(name, description, effect){
 }
 
 const powerupList = [
-    healthUp {
+    {
         name: "Health-Up",
         description: "Increase your maximum health by 1",
         effect: function(player){
             player.maxHealth += 1;
         }
-    }
+    },
+    {
+        name: "Quiver-Up",
+        description: "Increase your maximum quiver size by 1",
+        effect: function(player){
+            player.maxQuiver += 1;
+        }
+    },
+    {
+        name: "Jump Pack",
+        description: "Gain the ability to jump an additional time",
+        effect: function(player){
+            player.jumpAmount += 1;
+        }
+    },
 ];
+
+//powerupList[0].effect(player1); //As an example, this 
