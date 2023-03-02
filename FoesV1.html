@@ -25,6 +25,7 @@ var player1;
 var player2;
 var player1Platform;
 var player2Platform;
+var playerMovement = true;
 
 const container = document.getElementById("canvasContainer");
 
@@ -162,7 +163,7 @@ function component(width, height, color, x, y, id) {
 
 function player1Shoot(){
     console.log("P1 spear created");
-        if(myGameArea.keys[90] && player1.quiver.length != player1.quiverMax){
+        if(myGameArea.keys[90] && player1.quiver.length != player1.quiverMax && playerMovement){
             player1.quiver.push(new component(50, 15, "red", (player1.x+player1.width), (player1.y+5)));
             player1.quiver[(player1.quiver.length)-1].speedX = 13;
         }
@@ -173,7 +174,7 @@ function player1Shoot(){
 
 function player2Shoot(){
     console.log("P2 spear created");
-        if(myGameArea.keys[191] && player2.quiver.length != player2.quiverMax){
+        if(myGameArea.keys[191] && player2.quiver.length != player2.quiverMax && playerMovement){
             player2.quiver.push(new component(50, 15, "blue", (player2.x+player2.width), (player2.y+5)));
             player2.quiver[(player2.quiver.length)-1].speedX = -13;
         }
@@ -183,7 +184,7 @@ function player2Shoot(){
 }
 
 function player1Jump(jumpHeight){
-    if(player1.jumpAmount > 0){
+    if(player1.jumpAmount > 0 && playerMovement){
     	player1.jumpAmount -= 1;
     	player1.gravitySpeed = jumpHeight;
     }
@@ -191,26 +192,32 @@ function player1Jump(jumpHeight){
 }
 
 function player2Jump(jumpHeight){
-    if(player2.jumpAmount > 0){
+    if(player2.jumpAmount > 0 && playerMovement){
     	player2.jumpAmount -= 1;
     	player2.gravitySpeed = jumpHeight;
     }
 }
 
 function player1HitBox(positionX, positionY, i){
-    if(positionX >= player1.x && positionY >= player1.y && positionY <= player1.y + player1.height && positionX <= player1.x + player1.width && player2.quiver[i].hasNotHitPlayer){
+    if(playerMovement && positionX >= player1.x && positionY >= player1.y && positionY <= player1.y + player1.height && positionX <= player1.x + player1.width && player2.quiver[i].hasNotHitPlayer){
         player2.quiver[i].hasNotHitPlayer = false;
         console.log("player1 is hit");
         player1.currentHealth -= 1;
+    }
+    if(player1.currentHealth <= 0){
+        playerMovement = false;
     }
 
 }
 
 function player2HitBox(positionX, positionY, i){
-    if(positionX >= player2.x && positionY >= player2.y && positionY <= player2.y + player2.height && positionX <= player2.x + player2.width && player1.quiver[i].hasNotHitPlayer){
+    if(playerMovement && positionX >= player2.x && positionY >= player2.y && positionY <= player2.y + player2.height && positionX <= player2.x + player2.width && player1.quiver[i].hasNotHitPlayer){
         player1.quiver[i].hasNotHitPlayer = false;
         console.log("player2 is hit");
         player2.currentHealth -= 1;
+    }
+    if(player2.currentHealth <= 0){
+        playerMovement = false;
     }
 
 }
@@ -227,6 +234,7 @@ function resetRound(){
     player2.x = player2.originalX;
     player2.y = player2.originalY;
     player2.currentHealth = player2.maxHealth;
+    playerMovement = true;
 
 }
 
@@ -239,11 +247,11 @@ function updateGameArea() {
     player2.speedX = 0;
     player2.speedY = 0; 
     //player 1 movement
-    if ((myGameArea.keys && myGameArea.keys[65]) && player1.x != 8) {player1.speedX = -2; }
-    if ((myGameArea.keys && myGameArea.keys[68]) && player1.x != playAreaSize+8) {player1.speedX = 2; }
+    if ((myGameArea.keys && myGameArea.keys[65]) && player1.x != 8 && playerMovement) {player1.speedX = -2; }
+    if ((myGameArea.keys && myGameArea.keys[68]) && player1.x != playAreaSize+8 && playerMovement) {player1.speedX = 2; }
     //player 2 movement
-    if ((myGameArea.keys && myGameArea.keys[37]) && player2.x != myGameArea.canvas.width-playAreaSize-48) {player2.speedX = -2;}
-    if ((myGameArea.keys && myGameArea.keys[39]) && player2.x != myGameArea.canvas.width-48) {player2.speedX = 2; }
+    if ((myGameArea.keys && myGameArea.keys[37]) && player2.x != myGameArea.canvas.width-playAreaSize-48 && playerMovement) {player2.speedX = -2;}
+    if ((myGameArea.keys && myGameArea.keys[39]) && player2.x != myGameArea.canvas.width-48 && playerMovement) {player2.speedX = 2; }
     
     //player 1 spear function
     //if(myGameArea.keys && myGameArea.keys[90])
