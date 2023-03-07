@@ -27,6 +27,7 @@ const powerupList = [
         description: "Gain the ability to jump an additional time",
         effect: function(player){
             player.jumpAmount += 1;
+            player.storedJumpAmount += 1;
         }
     }
 ];

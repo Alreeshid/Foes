@@ -48,6 +48,9 @@ function startGame() {
     player2 = new component(40, 40, "blue", myGameArea.canvas.width-50, myGameArea.canvas.height-90, 'player2');
     player1Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", 8, myGameArea.canvas.height-40, 'player1Platform');
     player2Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", myGameArea.canvas.width-(myGameArea.canvas.width/4)-48, myGameArea.canvas.height-40, 'player1Platform');
+    
+    powerupList[2].effect(player1);
+    console.log(player1.jumpAmount);
 }
 //const playAreaSize = myGameArea.canvas.width/4;
 
@@ -120,6 +123,7 @@ function component(width, height, color, x, y, id) {
     this.speedY = 0; 
 
     this.jumpAmount = 2;
+    this.storedJumpAmount = this.jumpAmount;
     this.gravity = 0.2;
     this.gravitySpeed = 0;
 
@@ -159,7 +163,7 @@ function component(width, height, color, x, y, id) {
         if (this.y > rockbottom && (this.id === 'player1' || this.id === 'player2')) {
             this.y = rockbottom;
             this.gravitySpeed = 0;
-            this.jumpAmount = 2;
+            this.jumpAmount = this.storedJumpAmount;
         }
     }
 }
