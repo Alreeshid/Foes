@@ -13,6 +13,7 @@ const powerupList = [
         description: "Increase your maximum health by 1",
         effect: function(player){
             player.maxHealth += 1;
+            player.currentHealth += 1;
         }
     },
     {
