@@ -49,7 +49,7 @@ function startGame() {
     player1Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", 8, myGameArea.canvas.height-40, 'player1Platform');
     player2Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", myGameArea.canvas.width-(myGameArea.canvas.width/4)-48, myGameArea.canvas.height-40, 'player1Platform');
     
-    powerupList[0].effect(player1);
+    powerupList[4].effect(player1);
     //console.log(player1.jumpAmount);
 }
 //const playAreaSize = myGameArea.canvas.width/4;
@@ -127,6 +127,8 @@ function component(width, height, color, x, y, id) {
     this.gravity = 0.2;
     this.gravitySpeed = 0;
 
+    this.shootSpeed = 13;
+
     this.maxHealth = 3;
     this.currentHealth = this.maxHealth;
 
@@ -173,7 +175,7 @@ function player1Shoot(){
     console.log("P1 spear created");
         if(myGameArea.keys[90] && player1.quiver.length != player1.quiverMax && playerMovement){
             player1.quiver.push(new component(50, 15, "red", (player1.x+player1.width), (player1.y+5)));
-            player1.quiver[(player1.quiver.length)-1].speedX = 13;
+            player1.quiver[(player1.quiver.length)-1].speedX = player1.shootSpeed;
         }
         else{
             console.log('p1 spears are maxed');
@@ -184,7 +186,7 @@ function player2Shoot(){
     console.log("P2 spear created");
         if(myGameArea.keys[191] && player2.quiver.length != player2.quiverMax && playerMovement){
             player2.quiver.push(new component(50, 15, "blue", (player2.x+player2.width), (player2.y+5)));
-            player2.quiver[(player2.quiver.length)-1].speedX = -13;
+            player2.quiver[(player2.quiver.length)-1].speedX = -player2.shootSpeed;
         }
         else{
             console.log('p2 spears are maxed');

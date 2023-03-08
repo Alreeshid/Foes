@@ -30,6 +30,20 @@ const powerupList = [
             player.jumpAmount += 1;
             player.storedJumpAmount += 1;
         }
+    },
+    {
+        name: "Faster Spear",
+        description: "Increases the speed of your projectiles",
+        effect: function(player){
+            player.shootSpeed += 5;
+        }
+    },
+    {
+        name: "Slower Spear",
+        description: "Decreases the speed of your projectiles",
+        effect: function(player){
+            player.shootSpeed -= 5;
+        }
     }
 ];
 
