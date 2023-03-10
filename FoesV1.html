@@ -35,6 +35,7 @@ const container = document.getElementById("canvasContainer");
 
 function startScreen(){
     myGameArea.start();
+    graphicArea.start();
 }
 
 function startGame() {
@@ -110,6 +111,34 @@ var myGameArea = {
     clear : function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+}
+var graphicArea = {
+    canvas: document.createElement("canvas"),
+
+    start: function(){
+        this.canvas.width = 720;
+        this.canvas.height = 50;
+        this.canvas.style.backgroundColor = "black";
+        
+
+        this.context = this.canvas.getContext("2d");
+        container.appendChild(this.canvas);
+
+        let string = "Welcome to our game!";
+        let stringArray = string.split("");
+
+        this.context.font = "12px Arial";
+        this.context.fillStyle = "red";
+        this.context.strokeText("element", 5, 10);
+        stringArray.forEach(element => {
+            this.context.strokeText(element, 5, 10);
+        });
+    },
+    //openingText: function(){
+        
+
+       
+   // }
 }
 
 function component(width, height, color, x, y, id) {
