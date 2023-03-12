@@ -36,6 +36,7 @@ const container = document.getElementById("canvasContainer");
 function startScreen(){
     myGameArea.start();
     graphicArea.start();
+    graphicArea.typeWriter("Welcome to our game!");
 }
 
 function startGame() {
@@ -50,7 +51,7 @@ function startGame() {
     player1Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", 8, myGameArea.canvas.height-40, 'player1Platform');
     player2Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", myGameArea.canvas.width-(myGameArea.canvas.width/4)-48, myGameArea.canvas.height-40, 'player1Platform');
     
-    powerupList[5].effect(player1);
+    powerupList[4].effect(player1);
     //console.log(player1.jumpAmount);
 }
 //const playAreaSize = myGameArea.canvas.width/4;
@@ -113,32 +114,39 @@ var myGameArea = {
     }
 }
 var graphicArea = {
-    canvas: document.createElement("canvas"),
+    div: document.createElement("div"),
 
     start: function(){
-        this.canvas.width = 720;
-        this.canvas.height = 50;
-        this.canvas.style.backgroundColor = "black";
+        this.div.width = 720;
+        this.div.height = 50;
+
+            this.div.style.backgroundColor = "black";
+            this.div.style.color = 'white';
+            this.div.style.margin = 'auto';
+            this.div.style.textAlign = 'center';
         
+        container.appendChild(this.div);
 
-        this.context = this.canvas.getContext("2d");
-        container.appendChild(this.canvas);
+        // let string = "Welcome to our game!";
+        // let stringArray = string.split("");
 
-        let string = "Welcome to our game!";
-        let stringArray = string.split("");
-
-        this.context.font = "12px Arial";
-        this.context.fillStyle = "red";
-        this.context.strokeText("element", 5, 10);
-        stringArray.forEach(element => {
-            this.context.strokeText(element, 5, 10);
-        });
+        // stringArray.forEach(function(element){
+        //     this.div.innerHTML += element;
+        // });
     },
-    //openingText: function(){
-        
+    clear: function(){
+        this.div.innerHTML = "";
+    },
+    typeWriter: function(text){
+        let i = 0;
+        let speed = 50;
 
-       
-   // }
+        if(i < text.length){
+            this.div.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
 }
 
 function component(width, height, color, x, y, id) {
@@ -157,7 +165,6 @@ function component(width, height, color, x, y, id) {
     this.gravitySpeed = 0;
 
     this.shootSpeed = 13;
-    this.spearHeight = 15;
 
     this.maxHealth = 3;
     this.currentHealth = this.maxHealth;
@@ -204,7 +211,7 @@ function component(width, height, color, x, y, id) {
 function player1Shoot(){
     console.log("P1 spear created");
         if(myGameArea.keys[90] && player1.quiver.length != player1.quiverMax && playerMovement){
-            player1.quiver.push(new component(50, player1.spearHeight, "red", (player1.x+player1.width), (player1.y+5)));
+            player1.quiver.push(new component(50, 15, "red", (player1.x+player1.width), (player1.y+5)));
             player1.quiver[(player1.quiver.length)-1].speedX = player1.shootSpeed;
         }
         else{
@@ -215,7 +222,7 @@ function player1Shoot(){
 function player2Shoot(){
     console.log("P2 spear created");
         if(myGameArea.keys[191] && player2.quiver.length != player2.quiverMax && playerMovement){
-            player2.quiver.push(new component(50, player2.spearHeight, "blue", (player2.x+player2.width), (player2.y+5)));
+            player2.quiver.push(new component(50, 15, "blue", (player2.x+player2.width), (player2.y+5)));
             player2.quiver[(player2.quiver.length)-1].speedX = -player2.shootSpeed;
         }
         else{
