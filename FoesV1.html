@@ -36,7 +36,7 @@ const container = document.getElementById("canvasContainer");
 function startScreen(){
     myGameArea.start();
     graphicArea.start();
-    graphicArea.typeWriter("Welcome to our game!");
+    graphicArea.write("Welcome to our game!");
 }
 
 function startGame() {
@@ -137,15 +137,19 @@ var graphicArea = {
     clear: function(){
         this.div.innerHTML = "";
     },
+    write: function(text){
+        this.div.innerHTML = text;
+    },
     typeWriter: function(text){
-        let i = 0;
-        let speed = 50;
+        var i = 0;
+        var speed = 25;
+        var textArray = text.split("");
 
-        if(i < text.length){
-            this.div.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-        }
+        textArray.forEach(element => {
+            this.div.innerHTML += element;
+            //setInterval(this, speed);
+        });
+
     }
 }
 
