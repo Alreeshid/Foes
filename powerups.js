@@ -44,6 +44,13 @@ const powerupList = [
         effect: function(player){
             player.shootSpeed -= 5;
         }
+    },
+    {
+        name: "Bigger Spear",
+        description: "increases the size of your projectile",
+        effect: function(player){
+            player.spearHeight += 10;
+        }
     }
 ];
 
