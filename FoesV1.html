@@ -157,9 +157,25 @@ var graphicArea = {
 
         var table = document.createElement("table");
         this.div.appendChild(table);
-        var row = table.insertRow(0);
-        var cell1 = row.insertCell(0);
-        cell1.innerHTML = "GOT EM" + player.id;
+
+        var pUpNames = table.insertRow(0);
+        var cell1 = pUpNames.insertCell(0);
+        var cell2 = pUpNames.insertCell(1);
+        cell1.innerHTML = "Name for pUP" + " " + player.id;
+        cell2.innerHTML = "Name for pUP" + " " + player.id;
+
+        var pUpDescrip = table.insertRow(1);
+        cell1 = pUpDescrip.insertCell(0);
+        cell2 = pUpDescrip.insertCell(1);
+        cell1.innerHTML = "Description for pUP" + " " + player.id;
+        cell2.innerHTML = "Description for pUP" + " " + player.id;
+
+        var pUpButtons = table.insertRow(2);
+        cell1 = pUpButtons.insertCell(0);
+        cell2 = pUpButtons.insertCell(0);
+        cell1.innerHTML = "button" + " " + player.id;
+        cell2.innerHTML = "button" + " " + player.id;
+
     }
 
 }
