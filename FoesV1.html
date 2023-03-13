@@ -162,7 +162,6 @@ function component(width, height, color, x, y, id) {
     this.height = height;
 
     this.speedX = 0;
-    this.speedY = 0; 
 
     this.jumpAmount = 2;
     this.storedJumpAmount = this.jumpAmount;
@@ -198,7 +197,7 @@ function component(width, height, color, x, y, id) {
     this.newPos = function() {
         this.gravitySpeed += this.gravity;
         if(this.id === 'player1' || this.id === 'player2'){
-            this.y += this.speedY + this.gravitySpeed; 
+            this.y += this.gravitySpeed; 
         }
         this.x += this.speedX;
         this.hitBottom();            
@@ -213,7 +212,13 @@ function component(width, height, color, x, y, id) {
     }
 }
 
-
+/*
+player1Shoot is a function that is called when player 1 presses the fire button.
+It creates a new game component that is used as a projectile.
+This projectile is stored in an array called quiver, which is a part of player 1.
+If player 1 used all of their projectiles while it's on screen, they will not be able to fire again until
+it is deleted off screen. 
+*/
 function player1Shoot(){
     console.log("P1 spear created");
         if(myGameArea.keys[90] && player1.quiver.length != player1.quiverMax && playerMovement){
@@ -224,6 +229,8 @@ function player1Shoot(){
             console.log('p1 spears are maxed');
         }
 }
+
+//Same as player1Shoot, but edited for player 2 functionality.
 
 function player2Shoot(){
     console.log("P2 spear created");
