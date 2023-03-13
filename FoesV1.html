@@ -243,6 +243,11 @@ function player2Shoot(){
         }
 }
 
+/*
+player1Jump is called when player 1 presses jump. This will only run if
+player 1 hasn't used up their jumps before touching the ground.
+*/
+
 function player1Jump(jumpHeight){
     if(player1.jumpAmount > 0 && playerMovement){
     	player1.jumpAmount -= 1;
@@ -251,12 +256,16 @@ function player1Jump(jumpHeight){
 
 }
 
+//Same as player1Jump, but edited for player 2 functionality.
+
 function player2Jump(jumpHeight){
     if(player2.jumpAmount > 0 && playerMovement){
     	player2.jumpAmount -= 1;
     	player2.gravitySpeed = jumpHeight;
     }
 }
+
+
 
 function player1HitBox(positionX, positionY, i){
     if(playerMovement && positionX >= player1.x && positionY >= player1.y && positionY <= player1.y + player1.height && positionX <= player1.x + player1.width && player2.quiver[i].hasNotHitPlayer){
