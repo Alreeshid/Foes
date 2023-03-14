@@ -291,7 +291,11 @@ function player2Jump(jumpHeight){
     }
 }
 
-
+/*
+player1Hitbox gets the position of player 1 and player 2's projectile. 
+If they overlap, player1 takes damage. The boolean hasNotHitPlayer will turn false so
+the collision of player 1 and player 2's projectile only happens once.
+*/
 
 function player1HitBox(positionX, positionY, i){
     if(playerMovement && positionX >= player1.x && positionY >= player1.y && positionY <= player1.y + player1.height && positionX <= player1.x + player1.width && player2.quiver[i].hasNotHitPlayer){
@@ -305,6 +309,8 @@ function player1HitBox(positionX, positionY, i){
     }
 
 }
+
+//Has the same function as player1Hitbox, but edited for player 2
 
 function player2HitBox(positionX, positionY, i){
     if(playerMovement && positionX >= player2.x && positionY >= player2.y && positionY <= player2.y + player2.height && positionX <= player2.x + player2.width && player1.quiver[i].hasNotHitPlayer){
