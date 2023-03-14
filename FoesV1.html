@@ -156,6 +156,8 @@ var graphicArea = {
         this.div.innerHTML = "";
 
         var table = document.createElement("table");
+        table.setAttribute("id", "powerUpTable");
+        tableID = document.getElementById("powerUpTable");
         table.style.width = "100%";
         this.div.appendChild(table);
 
@@ -170,15 +172,18 @@ var graphicArea = {
         cell2 = pUpDescrip.insertCell(1);
         cell1.innerHTML = "Description for pUP" + " " + player.id;
         cell2.innerHTML = "Description for pUP" + " " + player.id;
-        cell2.onclick = function(){
-            console.log('clicky');
-        }
+        
 
         var pUpButtons = table.insertRow(2);
         cell1 = pUpButtons.insertCell(0);
         cell2 = pUpButtons.insertCell(0);
         cell1.innerHTML = "button" + " " + player.id;
         cell2.innerHTML = "button" + " " + player.id;
+
+        cell1,cell2.onclick = function(){
+            console.log('clicky');
+            tableID.remove();
+        }
 
     }
 
@@ -310,6 +315,8 @@ function player1HitBox(positionX, positionY, i){
     if(player1.currentHealth <= 0){
         playerMovement = false;
         resetRoundButtonId.style.display = "block";
+
+        graphicArea.presentPowerups(player2);
     }
 
 }
