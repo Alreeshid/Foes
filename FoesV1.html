@@ -327,9 +327,13 @@ function player2HitBox(positionX, positionY, i){
 
 }
 
+//hardReset causes the file to refresh, causing the game to restart completely
+
 function hardReset(){
     location.reload();
 }
+
+//resetRound resets the round while allowing the players to keep their powerups
 
 function resetRound(){
     myGameArea.clear();
@@ -344,7 +348,10 @@ function resetRound(){
 
 }
 
-
+/*
+updateGameArea clears the canvas, gets the new position of all game objects,
+redraws the game objects, and calls the hitbox funtion about 50-60 times per second.
+*/
 function updateGameArea() {
     let playAreaSize = myGameArea.canvas.width/4;
     myGameArea.clear();
