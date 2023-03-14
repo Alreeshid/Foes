@@ -156,6 +156,7 @@ var graphicArea = {
         this.div.innerHTML = "";
 
         var table = document.createElement("table");
+        table.style.width = "100%";
         this.div.appendChild(table);
 
         var pUpNames = table.insertRow(0);
@@ -169,6 +170,9 @@ var graphicArea = {
         cell2 = pUpDescrip.insertCell(1);
         cell1.innerHTML = "Description for pUP" + " " + player.id;
         cell2.innerHTML = "Description for pUP" + " " + player.id;
+        cell2.onclick = function(){
+            console.log('clicky');
+        }
 
         var pUpButtons = table.insertRow(2);
         cell1 = pUpButtons.insertCell(0);
