@@ -155,6 +155,25 @@ var graphicArea = {
     presentPowerups: function(player){
         this.div.innerHTML = "";
 
+        var rand1 = Math.floor(Math.random() * powerupList.length);
+        var rand2 = generateRand();
+
+        function generateRand(){
+            var x = Math.floor(Math.random() * powerupList.length);
+            if(x == rand1){
+                generateRand();
+            }
+            else{
+                return x;
+            }
+        }
+
+        power1 = powerupList[rand1];
+        power2 = powerupList[rand2];
+
+        console.log(rand1);
+        console.log(rand2);
+
         var table = document.createElement("table");
         table.setAttribute("id", "powerUpTable");
         tableID = document.getElementById("powerUpTable");
@@ -164,27 +183,32 @@ var graphicArea = {
         var pUpNames = table.insertRow(0);
         var cell1 = pUpNames.insertCell(0);
         var cell2 = pUpNames.insertCell(1);
-        cell1.innerHTML = "Name for pUP" + " " + player.id;
-        cell2.innerHTML = "Name for pUP" + " " + player.id;
+        cell1.innerHTML = power1.name;
+        cell2.innerHTML = power2.name;
 
         var pUpDescrip = table.insertRow(1);
         cell1 = pUpDescrip.insertCell(0);
         cell2 = pUpDescrip.insertCell(1);
-        cell1.innerHTML = "Description for pUP" + " " + player.id;
-        cell2.innerHTML = "Description for pUP" + " " + player.id;
+        cell1.innerHTML = power1.description;
+        cell2.innerHTML = power2.description;
         
 
         var pUpButtons = table.insertRow(2);
         cell1 = pUpButtons.insertCell(0);
         cell2 = pUpButtons.insertCell(0);
-        cell1.innerHTML = "button" + " " + player.id;
-        cell2.innerHTML = "button" + " " + player.id;
+        cell1.innerHTML = "Click Here to Select";
+        cell2.innerHTML = "Click Here to Select";
 
-        cell1,cell2.onclick = function(){
-            console.log('clicky');
-            tableID.remove();
+
+        cell1.onclick = chosen(power1);
+        cell2.onclick = chosen(power2);
+
+        function chosen(power){
+            graphicArea.div.removeChild(document.getElementById("powerUpTable"));
+            graphicArea.div.innerHTML = "Success";
+
+            power.effect(player);
         }
-
     }
 
 }
@@ -316,7 +340,7 @@ function player1HitBox(positionX, positionY, i){
         playerMovement = false;
         resetRoundButtonId.style.display = "block";
 
-        graphicArea.presentPowerups(player2);
+        graphicArea.presentPowerups(player1);
     }
 
 }
@@ -333,7 +357,7 @@ function player2HitBox(positionX, positionY, i){
         playerMovement = false;
         resetRoundButtonId.style.display = "block";
         
-        graphicArea.presentPowerups(player1);
+        graphicArea.presentPowerups(player2);
     }
 
 }
