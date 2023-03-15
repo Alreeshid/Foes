@@ -169,8 +169,8 @@ var graphicArea = {
             }
         }
 
-        power1 = powerupList[rand1];
-        power2 = powerupList[rand2];
+        var power1 = powerupList[rand1];
+        var power2 = powerupList[rand2];
 
         console.log(rand1);
         console.log(rand2);
@@ -203,6 +203,8 @@ var graphicArea = {
 
         cell1.onclick = chosen1;
         cell2.onclick = chosen2;
+
+        console.log(player.id + " " + loser.id);
 
         function chosen1(){
             graphicArea.div.removeChild(document.getElementById("powerUpTable"));
