@@ -154,6 +154,7 @@ var graphicArea = {
     },
     presentPowerups: function(player){
         this.div.innerHTML = "";
+        var loser = player;
 
         var rand1 = Math.floor(Math.random() * powerupList.length);
         var rand2 = generateRand();
@@ -200,14 +201,20 @@ var graphicArea = {
         cell2.innerHTML = "Click Here to Select";
 
 
-        cell1.onclick = chosen(power1);
-        cell2.onclick = chosen(power2);
+        cell1.onclick = chosen1;
+        cell2.onclick = chosen2;
 
-        function chosen(power){
+        function chosen1(){
             graphicArea.div.removeChild(document.getElementById("powerUpTable"));
             graphicArea.div.innerHTML = "Success";
 
-            power.effect(player);
+            power1.effect(loser);
+        }
+        function chosen2(){
+            graphicArea.div.removeChild(document.getElementById("powerUpTable"));
+            graphicArea.div.innerHTML = "Success";
+
+            power2.effect(loser);
         }
     }
 
