@@ -20,7 +20,7 @@ const powerupList = [
         name: "Quiver-Up",
         description: "Increase your maximum quiver size by 1",
         effect: function(player){
-            player.maxQuiver += 1;
+            player.quiverMax += 1;
         }
     },
     {
