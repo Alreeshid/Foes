@@ -152,28 +152,24 @@ var graphicArea = {
         });
 
     },
-    presentPowerups: function(player){
+    presentPowerups: function(loser){
         this.div.innerHTML = "";
-        var loser = player;
+        
 
         var rand1 = Math.floor(Math.random() * powerupList.length);
-        var rand2 = generateRand();
+        var rand2 = Math.floor(Math.random() * powerupList.length);
 
-        function generateRand(){
-            var x = Math.floor(Math.random() * powerupList.length);
-            if(x == rand1){
-                generateRand();
-            }
-            else{
-                return x;
-            }
-        }
+        if(rand2 == rand1){
+            while(rand2 == rand1){
+                rand2 = Math.floor(Math.random() * powerupList.length);
+            }      
+        }  
 
         var power1 = powerupList[rand1];
         var power2 = powerupList[rand2];
 
-        console.log(rand1);
-        console.log(rand2);
+        //console.log(rand1);
+        //console.log(rand2);
 
         var table = document.createElement("table");
         table.setAttribute("id", "powerUpTable");
@@ -193,7 +189,7 @@ var graphicArea = {
         cell1.innerHTML = power1.description;
         cell2.innerHTML = power2.description;
         
-
+        
         var pUpButtons = table.insertRow(2);
         cell1 = pUpButtons.insertCell(0);
         cell2 = pUpButtons.insertCell(0);
@@ -204,7 +200,7 @@ var graphicArea = {
         cell1.onclick = chosen1;
         cell2.onclick = chosen2;
 
-        console.log(player.id + " " + loser.id);
+        console.log(loser.id + " " + loser.id);
 
         function chosen1(){
             graphicArea.div.removeChild(document.getElementById("powerUpTable"));
@@ -217,6 +213,7 @@ var graphicArea = {
             graphicArea.div.innerHTML = "Success";
 
             power2.effect(loser);
+            //console.log(power2.effect);
         }
     }
 
