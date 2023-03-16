@@ -30,6 +30,8 @@ var player1Platform;
 var player2Platform;
 var playerMovement = true;
 var resetRoundButtonId = document.getElementById("resetRound");
+var rand1;
+var rand2;
 resetRoundButtonId.style.display = "none";
 
 const container = document.getElementById("canvasContainer");
@@ -42,6 +44,9 @@ function startScreen(){
 
 function startGame() {
     //myGameArea.start();
+
+    rand1 = getRandomNumber1();
+    rand2 = getRandomNumber2(rand1);
 
     var hidden = document.getElementById("startButton");
     hidden.style.display = "none";
@@ -152,13 +157,13 @@ var graphicArea = {
         });
 
     },
-    presentPowerups: function(loser){
+    presentPowerups: function(loser, rand1, rand2){
         this.div.innerHTML = "";
         console.log(loser);
         
 
-        var rand1 = 5;
-        var rand2 = 5;
+        //var rand1 = getRandomNumber1();
+        //var rand2 = getRandomNumber2(rand1);
 
         var power1 = powerupList[rand1];
         var power2 = powerupList[rand2];
@@ -203,6 +208,7 @@ var graphicArea = {
 
             power1.effect(loser);
             console.log(power1.effect);
+            resetRound();
         }
         function chosen2(){
             graphicArea.div.removeChild(document.getElementById("powerUpTable"));
@@ -210,20 +216,24 @@ var graphicArea = {
 
             power2.effect(loser);
             console.log(power2.effect);
+            resetRound();
         }
     }
 
 }
 
-function getRandomNumbers(){
+function getRandomNumber1(){
     var rand1 = Math.floor(Math.random() * powerupList.length);
-        var rand2 = Math.floor(Math.random() * powerupList.length);
+        return rand1;
+}
 
-        if(rand2 == rand1){
-            while(rand2 == rand1){
+function getRandomNumber2(random1){
+    var rand2 = Math.floor(Math.random() * powerupList.length);
+
+            while(rand2 == random1){
                 rand2 = Math.floor(Math.random() * powerupList.length);
-            }      
-        }  
+            }    
+            return rand2;  
 }
 
 function component(width, height, color, x, y, id) {
@@ -353,7 +363,7 @@ function player1HitBox(positionX, positionY, i){
         playerMovement = false;
         resetRoundButtonId.style.display = "block";
 
-        graphicArea.presentPowerups(player1);
+        graphicArea.presentPowerups(player1, rand1, rand2);
     }
 
 }
@@ -370,7 +380,7 @@ function player2HitBox(positionX, positionY, i){
         playerMovement = false;
         resetRoundButtonId.style.display = "block";
         
-        graphicArea.presentPowerups(player2);
+        graphicArea.presentPowerups(player2, rand1, rand2);
     }
 
 }
@@ -393,6 +403,9 @@ function resetRound(){
     player2.currentHealth = player2.maxHealth;
     playerMovement = true;
     resetRoundButtonId.style.display = "none";
+
+    rand1 = getRandomNumber1();
+    rand2 = getRandomNumber2(rand1);
 
 }
 
