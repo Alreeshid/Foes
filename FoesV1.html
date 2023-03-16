@@ -157,7 +157,7 @@ var graphicArea = {
         });
 
     },
-    presentPowerups: function(loser, rand1, rand2){
+    presentPowerups: function(loser){
         this.div.innerHTML = "";
         console.log(loser);
         
@@ -206,16 +206,16 @@ var graphicArea = {
             graphicArea.div.removeChild(document.getElementById("powerUpTable"));
             graphicArea.div.innerHTML = "Success";
 
-            power1.effect(loser);
-            console.log(power1.effect);
+            power2.effect(loser);
+            console.log(power2.effect);
             resetRound();
         }
         function chosen2(){
             graphicArea.div.removeChild(document.getElementById("powerUpTable"));
             graphicArea.div.innerHTML = "Success";
 
-            power2.effect(loser);
-            console.log(power2.effect);
+            power1.effect(loser);
+            console.log(power1.effect);
             resetRound();
         }
     }
@@ -363,7 +363,7 @@ function player1HitBox(positionX, positionY, i){
         playerMovement = false;
         resetRoundButtonId.style.display = "block";
 
-        graphicArea.presentPowerups(player1, rand1, rand2);
+        graphicArea.presentPowerups(player1);
     }
 
 }
@@ -380,7 +380,7 @@ function player2HitBox(positionX, positionY, i){
         playerMovement = false;
         resetRoundButtonId.style.display = "block";
         
-        graphicArea.presentPowerups(player2, rand1, rand2);
+        graphicArea.presentPowerups(player2);
     }
 
 }
