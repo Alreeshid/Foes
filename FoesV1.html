@@ -52,7 +52,7 @@ function startGame() {
     player1Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", 8, myGameArea.canvas.height-40, 'player1Platform');
     player2Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", myGameArea.canvas.width-(myGameArea.canvas.width/4)-48, myGameArea.canvas.height-40, 'player1Platform');
     
-    powerupList[1].effect(player1);
+    //powerupList[1].effect(player1);
     //console.log(player1.jumpAmount);
 }
 //const playAreaSize = myGameArea.canvas.width/4;
@@ -156,8 +156,8 @@ var graphicArea = {
         this.div.innerHTML = "";
         
 
-        var rand1 = 1;
-        var rand2 = 1;
+        var rand1 = 5;
+        var rand2 = 5;
 
         var power1 = powerupList[rand1];
         var power2 = powerupList[rand2];
