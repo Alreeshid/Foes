@@ -15,6 +15,22 @@ canvas {
     height:407px;
     margin-top: 10%;
 }
+
+#powerUpTable, tr, td{
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 1.5px solid goldenrod;
+}
+
+#trackerTable1, #trackerTable2{
+    
+}
+#trackerTable1{
+    float: left;
+}
+#trackerTable2{
+    float: right;
+}
 </style>
 </head>
 <body onload="startScreen()">
@@ -157,6 +173,27 @@ var graphicArea = {
         });
 
     },
+    presentTrackers: function(){
+        this.div.innerHTML = "";//Empties existing Text from the black box
+
+        //This code generates a table for Player 1 - which trackes their ammo, health, and wins.
+        var table = document.createElement("table");
+        table.setAttribute("id", "trackerTable1");
+        tableID = document.getElementById("trackerTable1");
+        table.style.width = "100%";
+        this.div.appendChild(table);
+
+        var playerName = table.insertRow(0);
+        var cell1 = playerName.insertCell(0);
+        var cell2;
+        cell1.innerHTML = "[Player 1]";
+        
+        var p1Health = table.insertRow(0);
+        cell1 = playerName.insertCell(0);
+        cell2 = playerName.insertCell(1);
+        cell1.innerHTML = "Ammo";
+        cell1.innerHTML = player1.quiver;
+    },
     presentPowerups: function(loser){
         this.div.innerHTML = "";
         console.log(loser);
@@ -195,7 +232,9 @@ var graphicArea = {
         cell2 = pUpButtons.insertCell(0);
         cell1.innerHTML = "Click Here to Select";
         cell2.innerHTML = "Click Here to Select";
-
+        
+        cell1.style.border = "1.5px solid white";
+        cell2.style.border = "1.5px solid white";
 
         cell1.onclick = chosen1;
         cell2.onclick = chosen2;
@@ -204,7 +243,7 @@ var graphicArea = {
 
         function chosen1(){
             graphicArea.div.removeChild(document.getElementById("powerUpTable"));
-            graphicArea.div.innerHTML = "Success";
+            graphicArea.div.innerHTML = player1.quiver;
 
             power2.effect(loser);
             console.log(power2.effect);
