@@ -78,8 +78,6 @@ table, tr, td{
         //myGameArea.start();
         roundOngoing = true;
 
-        graphicArea.presentTrackers();
-
         rand1 = getRandomNumber1();
         rand2 = getRandomNumber2(rand1);
 
@@ -92,6 +90,7 @@ table, tr, td{
         player1Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", 8, myGameArea.canvas.height-40, 'player1Platform');
         player2Platform = new component(myGameArea.canvas.width/4 + 40, 40, "black", myGameArea.canvas.width-(myGameArea.canvas.width/4)-48, myGameArea.canvas.height-40, 'player1Platform');
         
+        graphicArea.presentTrackers();
         //powerupList[1].effect(player1);
         //console.log(player1.jumpAmount);
     }
@@ -211,12 +210,21 @@ table, tr, td{
             cell1.innerHTML = "[Player 1 Health] ";
             cell2.innerHTML = "[Player 2 Health] ";
             
+            //This creates the actual Health Bar in question for both players
             var p1HealthBar = document.createElement("progress");
             cell1.appendChild(p1HealthBar);
             p1HealthBar.id = "p1HealthBar";
             var p2HealthBar = document.createElement("progress");
             p2HealthBar.id = "p2HealthBar";
             cell2.appendChild(p2HealthBar);
+
+            p1HealthBar.max = player1.maxHealth;
+            p1HealthBar.value = player1.maxHealth;//This sets the INITIAL value, before updateBars() triggers
+            p2HealthBar.max = player2.maxHealth;
+            p2HealthBar.value = player2.maxHealth;
+
+           // p1HealthBar.style.backgroundColor = "#990D35"; //Claret Red
+            //p2HealthBar.style.backgroundColor = "#01295F"; //Royal Blue Traditional
             
             var playerAmmo = table.insertRow(1);
             cell1 = playerAmmo.insertCell(0);
@@ -230,9 +238,33 @@ table, tr, td{
             var p2AmmoBar = document.createElement("progress");
             p2AmmoBar.id = "p2AmmoBar";
             cell2.appendChild(p2AmmoBar);
+
+            p1AmmoBar.max = player1.quiverMax;
+            p1AmmoBar.value = player1.quiverMax;
+            p2AmmoBar.max = player2.quiverMax;
+            p2AmmoBar.value = player2.quiverMax;
         },
         updateBars: function(){
+            if(document.getElementById("p2AmmoBar")){ //Returns true if the ammo bar exists, therefore game is running
+                var p1H = document.getElementById("p1HealthBar");//P1 Health
+                var p1A = document.getElementById("p1AmmoBar");//P1 Ammo
+                var p2H = document.getElementById("p2HealthBar");//P2 Health
+                var p2A = document.getElementById("p2AmmoBar");//P2 Ammo
 
+                p1H.value = player1.currentHealth;
+                p2H.value = player2.currentHealth;
+
+                p1A.value = player1.quiverMax - player1.quiver.length;
+                p2A.value = player2.quiverMax - player2.quiver.length;
+
+                p1H.innerHTML = player1.currentHealth;
+                p2H.innerHTML = player2.currentHealth;
+
+                p1A.innerHTML = player1.quiverMax - player1.quiver.length;
+                p2A.innerHTML = player2.quiverMax - player2.quiver.length;
+
+
+            }
         },
         presentPowerups: function(loser){
             graphicArea.div.innerHTML = " ";
@@ -476,7 +508,7 @@ table, tr, td{
 
     function resetRound(){
         myGameArea.clear();
-        presentTrackers();
+        
         player1.x = player1.originalX;
         player1.y = player1.originalY;
         player1.currentHealth = player1.maxHealth;
@@ -488,6 +520,8 @@ table, tr, td{
 
         rand1 = getRandomNumber1();
         rand2 = getRandomNumber2(rand1);
+        graphicArea.presentTrackers();
+        roundOngoing = true;
 
     }
 
@@ -529,6 +563,8 @@ table, tr, td{
             player2.update();
             player1Platform.update();
             player2Platform.update();
+
+            graphicArea.updateBars();
 
             for(let i = 0; i<player1.quiver.length; i++){
 
