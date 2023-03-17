@@ -40,9 +40,12 @@ const powerupList = [
     },
     {
         name: "Slower Spear",
-        description: "Decreases the speed of your projectiles",
+        description: "Decreases the speed of your ENEMY's projectiles",
         effect: function(player){
-            player.shootSpeed -= 5;
+            if(player.id = "player1")
+                player2.shootSpeed -=5;
+            else
+                player1.shootSpeed -= 5;
         }
     },
     {
