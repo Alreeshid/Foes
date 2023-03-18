@@ -478,10 +478,18 @@ table, tr, td{
             player1.currentHealth -= 1;
         }
         if(player1.currentHealth <= 0){
-            playerMovement = false;
-            resetRoundButtonId.style.display = "block";
 
-            graphicArea.presentPowerups(player1);
+            //if(p2Win == matchesToWin){
+                graphicArea.write("Congratulations Player 2 for your victory! Please refresh the page if you would like to play again!");
+                playerMovement = false;
+           // }
+           // else{
+                playerMovement = false;
+                p2Win++;
+                resetRoundButtonId.style.display = "block";
+
+                graphicArea.presentPowerups(player1);
+            //}
         }
 
     }
