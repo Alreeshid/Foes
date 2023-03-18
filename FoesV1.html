@@ -68,6 +68,11 @@ table, tr, td{
 
     const container = document.getElementById("canvasContainer");
 
+    const matchesToWin = 5;
+    let roundNum = 1;
+    let p1Win = 0;
+    let p2Win = 0;
+
     function startScreen(){
         myGameArea.start();
         graphicArea.start();
