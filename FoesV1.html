@@ -77,7 +77,7 @@ table, tr, td{
 </div>
 <br>
 <div id="canvasContainer"></div>
-<br><br><br><br>
+<br><br><br><br><br><br><br>
 <div id="descripAndControl">
     <p id="control1">Player 1: W A D for Movement, Z To Shoot</p>
     <p id="control2">Player 2: Arrow Keys for Movement, <span id="slash">/</span> To Shoot</p>
@@ -104,7 +104,7 @@ table, tr, td{
 
     const container = document.getElementById("canvasContainer");
 
-    const matchesToWin = 5;
+    let matchesToWin = 5;
     let roundNum = 1;
     let p1Win = 0;
     let p2Win = 0;
@@ -310,7 +310,7 @@ table, tr, td{
         presentPowerups: function(loser){
             graphicArea.div.innerHTML = " ";
             console.log(loser);
-            
+
 
             //var rand1 = getRandomNumber1();
             //var rand2 = getRandomNumber2(rand1);
@@ -327,20 +327,36 @@ table, tr, td{
             table.style.width = "100%";
             this.div.appendChild(table);
 
-            var pUpNames = table.insertRow(0);
-            var cell1 = pUpNames.insertCell(0);
+            var loserPresent = table.insertRow(0);
+            var cell1 = loserPresent.insertCell(0);
+            if(loser.id == 'player1'){
+                cell1.colSpan = 2;
+                cell1.innerHTML = "Player 1 Has lost, but now the game gets a little harder. Please pick a powerup Player 1:<br><b>Player 2 Wins: "+ (p2Win+1)+"</b>";
+                cell1.style.backgroundColor = "#990D35";
+                cell1.style.color = "white";
+            }
+            else{
+                cell1.colSpan = 2;
+                cell1.innerHTML = "Player 2 Has lost, but now the game gets a little harder. Please pick a powerup Player 1:<br><b>Player 1 Wins: "+ (p1Win+1)+"</b>";
+                cell1.style.backgroundColor = "#01295F";
+                cell1.style.color = "white";
+            }
+            
+
+            var pUpNames = table.insertRow(1);
+            cell1 = pUpNames.insertCell(0);
             var cell2 = pUpNames.insertCell(1);
             cell1.innerHTML = power1.name;
             cell2.innerHTML = power2.name;
 
-            var pUpDescrip = table.insertRow(1);
+            var pUpDescrip = table.insertRow(2);
             cell1 = pUpDescrip.insertCell(0);
             cell2 = pUpDescrip.insertCell(1);
             cell1.innerHTML = power1.description;
             cell2.innerHTML = power2.description;
             
 
-            var pUpButtons = table.insertRow(2);
+            var pUpButtons = table.insertRow(3);
             cell1 = pUpButtons.insertCell(0);
             cell2 = pUpButtons.insertCell(0);
             cell1.innerHTML = "Click Here to Select";
@@ -357,14 +373,26 @@ table, tr, td{
             console.log(loser.id + " " + loser.id);
 
             function chosen1(){
+                if(loser.id == 'player1')
+                    p2Win++;
+                else
+                    p1Win++;
+
                 graphicArea.div.removeChild(document.getElementById("powerUpTable"));
                 graphicArea.div.innerHTML = player1.quiver;
 
                 power2.effect(loser);
                 console.log(power2.effect);
                 resetRound();
+
+                
             }
             function chosen2(){
+                if(loser.id == 'player1')
+                    p2Win++;
+                else
+                    p1Win++;
+
                 graphicArea.div.removeChild(document.getElementById("powerUpTable"));
                 graphicArea.div.innerHTML = "Success";
 
@@ -515,17 +543,19 @@ table, tr, td{
         }
         if(player1.currentHealth <= 0){
 
-            //if(p2Win == matchesToWin){
+            if(p2Win+1 == matchesToWin){
+                console.log(p2Win);
                 graphicArea.write("Congratulations Player 2 for your victory! Please refresh the page if you would like to play again!");
                 playerMovement = false;
-           // }
-           // else{
+            }
+            else{
+                //console.log("Bababooey");
                 playerMovement = false;
-                p2Win++;
+                
                 resetRoundButtonId.style.display = "block";
 
                 graphicArea.presentPowerups(player1);
-            //}
+            }
         }
 
     }
@@ -539,10 +569,17 @@ table, tr, td{
             player2.currentHealth -= 1;
         }
         if(player2.currentHealth <= 0){
+            if(p1Win+1 == matchesToWin){
+                console.log(p1Win);
+                graphicArea.write("Congratulations Player 1 for your victory! Please refresh the page if you would like to play again!");
+                playerMovement = false;
+            }
+            else{
             playerMovement = false;
             resetRoundButtonId.style.display = "block";
             
             graphicArea.presentPowerups(player2);
+            }
         }
 
     }
