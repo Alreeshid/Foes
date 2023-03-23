@@ -161,11 +161,11 @@ table, tr, td{
             })
             window.addEventListener('keypress', function (e){ //these functions are for player 1 and 2's shooting ability
                 
-                if(myGameArea.keys[90])
+                if(myGameArea.keys[86])
                 {
                     console.log("key is pressed");
                     player1Shoot();
-                    myGameArea.keys[90] = false;
+                    myGameArea.keys[86] = false;
                 }
                 if(myGameArea.keys[191]){
                     player2Shoot();
@@ -491,7 +491,7 @@ table, tr, td{
     */
     function player1Shoot(){
         console.log("P1 spear created");
-            if(myGameArea.keys[90] && player1.quiver.length != player1.quiverMax && playerMovement){
+            if(myGameArea.keys[86] && player1.quiver.length != player1.quiverMax && playerMovement){
                 player1.quiver.push(new component(50, player1.spearHeight, "red", (player1.x+player1.width), (player1.y+5)));
                 player1.quiver[(player1.quiver.length)-1].speedX = player1.shootSpeed;
             }
