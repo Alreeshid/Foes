@@ -18,8 +18,10 @@ body{
     font-weight: bolder;
     font-size: 1.4em;
 }
+
 #control1{color:#990D35;}
 #control2{color: #01295F}
+
 #descripAndControl{
     margin:auto;
     margin-top: 4.5%;
@@ -59,33 +61,42 @@ table, tr, td{
     padding-bottom: 4px;
     border: 1.5px solid goldenrod;
 }
+
+#pButton{
+    background-color: steelblue;
+}
 #pButton:hover{
-    background-color: silver;
+    background-color: goldenrod;
     color: #990D35;
 }
 
+#jumpBar1{
+    transform: rotate(270deg);
+}
+#jumpBar2{
 
+}
 </style>
 </head>
 <body onload="startScreen()">
 <h1 id="welcome">Welcome to 'Foes'!</h1>
 
 <div id = "buttons">
-    <button id= "startButton" onclick="startGame()">start</button>
-    <button onclick="hardReset()">reset</button>
-    <button id= "resetRound"  onclick="resetRound()">reset round</button>
+    <button id= "startButton" onclick="startGame()">Start Game</button>
+    <button onclick="hardReset()">Reset Game</button>
+    <button id= "resetRound"  onclick="resetRound()">Reset Round Without Powerup</button>
 </div>
 <br>
 <div id="canvasContainer"></div>
 <br><br><br><br><br><br><br>
 <div id="descripAndControl">
-    <p id="control1">Player 1: W A D for Movement, Z To Shoot</p>
+    <p id="control1">Player 1: W A D for Movement, V To Shoot</p>
     <p id="control2">Player 2: Arrow Keys for Movement, <span id="slash">/</span> To Shoot</p>
     <br><br>
     <p id="description">
         'Foes' is a game developed by GGC students Alex Shaklee, Alec Burns, and Sheondra Baker as part of STEC 4800's(Internship in Service Learning) Technology Ambassador's Program.
         <br><br>
-        When a player loses a round, they gain the opportunity to choose a powerup to help them in future rounds. As such, this game is intended to drift back and forth, and become a best of 5 Tug of War.
+        When a player <b>loses</b> a round, they gain the opportunity to choose a powerup to help them in future rounds. As such, this game is intended to drift back and forth, and become a best of 5 Tug of War.
     </p>
 </div>
 
@@ -240,7 +251,7 @@ table, tr, td{
 
         },
         presentTrackers: function(){
-            this.div.innerHTML = "Begin";//Empties existing Text from the black box
+            this.div.innerHTML = "Round " + roundNum;//Empties existing Text from the black box
 
             //document.getElementById("buttons").style.display = "none";
 
@@ -368,11 +379,14 @@ table, tr, td{
             cell1.innerHTML = "Click Here to Select";
             cell2.innerHTML = "Click Here to Select";
             
-            cell1.style.border = "1.5px solid white";
-            cell2.style.border = "1.5px solid white";
+            cell1.style.border = "3px solid white";
+            cell2.style.border = "3px solid white";
+            //cell1.style.backgroundColor = "silver";
+            //cell2.style.backgroundColor = "silver";
             cell1.setAttribute("id", "pButton");
             cell2.setAttribute("id", "pButton");
-
+            //cell1.style.
+            //cell2.style.
             cell1.onclick = chosen1;
             cell2.onclick = chosen2;
 
@@ -384,6 +398,7 @@ table, tr, td{
                 else
                     p1Win++;
 
+                roundNum++;
                 graphicArea.div.removeChild(document.getElementById("powerUpTable"));
                 graphicArea.div.innerHTML = player1.quiver;
 
@@ -399,6 +414,7 @@ table, tr, td{
                 else
                     p1Win++;
 
+                roundNum++;
                 graphicArea.div.removeChild(document.getElementById("powerUpTable"));
                 graphicArea.div.innerHTML = "Success";
 
