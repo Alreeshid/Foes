@@ -101,6 +101,7 @@ table, tr, td{
 </div>
 
 <script>
+    //This event listener prevents the screen from moving when you press arrow keys
     window.addEventListener("keydown", function(e) {
         if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
             e.preventDefault();
