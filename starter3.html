@@ -172,16 +172,17 @@ table, tr, td{
                 myGameArea.keys[e.keyCode] = (e.type == "keydown");         
             })
             window.addEventListener('keypress', function (e){ //these functions are for player 1 and 2's shooting ability
-                
-                if(myGameArea.keys[86])
+                //The correct keycode for the following is 86
+                if(myGameArea.keys[87])
                 {
                     console.log("key is pressed");
                     player1Shoot();
-                    myGameArea.keys[86] = false;
+                    myGameArea.keys[87] = false;
                 }
-                if(myGameArea.keys[191]){
+                //The correct keycode for the following is 191
+                if(myGameArea.keys[48]){
                     player2Shoot();
-                    myGameArea.keys[191] = false;
+                    myGameArea.keys[48] = false;
                 }
 
             //  if(myGameArea.keys[38]){
@@ -189,7 +190,8 @@ table, tr, td{
                 //    player2Jump(-6.6);
             // }
 
-                if(myGameArea.keys[87]){
+                //The correct keycode for the following is 87
+                if(myGameArea.keys[86]){
                     player1Jump(-6.6);
                 }
                 
@@ -508,7 +510,7 @@ table, tr, td{
     */
     function player1Shoot(){
         console.log("P1 spear created");
-            if(myGameArea.keys[86] && player1.quiver.length != player1.quiverMax && playerMovement){
+            if(player1.quiver.length != player1.quiverMax && playerMovement){
                 player1.quiver.push(new component(50, player1.spearHeight, "red", (player1.x+player1.width), (player1.y+5)));
                 player1.quiver[(player1.quiver.length)-1].speedX = player1.shootSpeed;
             }
@@ -521,7 +523,7 @@ table, tr, td{
 
     function player2Shoot(){
         console.log("P2 spear created");
-            if(myGameArea.keys[191] && player2.quiver.length != player2.quiverMax && playerMovement){
+            if(player2.quiver.length != player2.quiverMax && playerMovement){
                 player2.quiver.push(new component(50, player2.spearHeight, "blue", (player2.x+player2.width), (player2.y+5)));
                 player2.quiver[(player2.quiver.length)-1].speedX = -player2.shootSpeed;
             }

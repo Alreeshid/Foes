@@ -508,7 +508,7 @@ table, tr, td{
     */
     function player1Shoot(){
         console.log("P1 spear created");
-            if(myGameArea.keys[86] && player1.quiver.length != player1.quiverMax && playerMovement){
+            if(player1.quiver.length != player1.quiverMax && playerMovement){
                 player1.quiver.push(new component(50, player1.spearHeight, "red", (player1.x+player1.width), (player1.y+5)));
                 player1.quiver[(player1.quiver.length)-1].speedX = player1.shootSpeed;
             }
@@ -521,7 +521,7 @@ table, tr, td{
 
     function player2Shoot(){
         console.log("P2 spear created");
-            if(myGameArea.keys[191] && player2.quiver.length != player2.quiverMax && playerMovement){
+            if(player2.quiver.length != player2.quiverMax && playerMovement){
                 player2.quiver.push(new component(50, player2.spearHeight, "blue", (player2.x+player2.width), (player2.y+5)));
                 player2.quiver[(player2.quiver.length)-1].speedX = -player2.shootSpeed;
             }
