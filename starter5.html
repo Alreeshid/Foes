@@ -492,9 +492,9 @@ table, tr, td{
         this.hitBottom = function() {
             var rockbottom = myGameArea.canvas.height - this.height - 40;
             if (this.y > rockbottom && (this.id === 'player1' || this.id === 'player2')) {
-                this.y = rockbottom;
-                this.gravitySpeed = 0;
-                this.jumpAmount = this.storedJumpAmount;
+                //this.y = rockbottom;
+                //this.gravitySpeed = 0;
+                //this.jumpAmount = this.storedJumpAmount;
             }
         }
     }
