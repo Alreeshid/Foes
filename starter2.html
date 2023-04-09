@@ -76,11 +76,30 @@
         let canvas2 = document.getElementById("canvas2");
         let canvas3 = document.getElementById("canvas3");
 
+        var ctx1 = canvas1.getContext("2d");
+        var ctx2 = canvas2.getContext("2d");
+        var ctx3 = canvas3.getContext("2d");
+
         let animation1Running = false;
         let animation2Running = false;
         let animation3Running = false;
 
+        let box1X = 20;
+        let box2X = 20;
+        let box3X = 20;
+
         let interval = setInterval(runAnimationFrames, 20);
+
+        /*
+        window.addEventListener('keydown', function(e){
+                    if(e.keyCode == 68){
+                        box3X += 2;
+                    }
+                    if(e.keyCode == 65){
+                        box3X -= 2;
+                    }
+                })
+                */
 
         function animation1(){
             var ctx = canvas1.getContext("2d");
@@ -90,11 +109,13 @@
                 
 
                 ctx.fillStyle = "red";
-                ctx.fillRect(20, 10, 100, 100);
+                ctx.fillRect(box1X, 10, 100, 100);
+                
             }
             else{
                 animation1Running = false;
                 ctx.clearRect(0, 0, canvas1.width, canvas1.height);
+                box1X = 20;
             }
 
 
@@ -108,11 +129,12 @@
                 
 
                 ctx.fillStyle = "red";
-                ctx.fillRect(20, 10, 100, 100);
+                ctx.fillRect(box2X, 10, 100, 100);
             }
             else{
                 animation2Running = false;
                 ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+                box2X = 20;
             }
 
 
@@ -126,26 +148,43 @@
                 
 
                 ctx.fillStyle = "red";
-                ctx.fillRect(20, 10, 100, 100);
+                ctx.fillRect(box3X, 10, 100, 100);
             }
             else{
                 animation3Running = false;
                 ctx.clearRect(0, 0, canvas3.width, canvas3.height);
+                box3X = 20;
             }
 
         }
 
-        function runAnimationFrames(canvas){
-            if(animation1Running) {
+        function runAnimationFrames(){
 
+            if(animation1Running) {
+                //box1X += 1;
+                //ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+                ctx1.fillStyle = "red";
+                ctx1.fillRect(box1X, 10, 100, 100);
             }
             
             if(animation2Running) {
-
+                box2X += 1;
+                ctx2.clearRect(0, 0, canvas1.width, canvas1.height);
+                ctx2.fillStyle = "red";
+                ctx2.fillRect(box2X, 10, 100, 100);
+                //if(box2X >= 720){
+                //    box2X = 720;
+                //}
             }
 
             if(animation3Running) {
-
+                
+                ctx3.fillStyle = "red";
+                if(box3X >= 620){
+                    box3X = 620;
+                }
+                ctx3.clearRect(0, 0, canvas1.width, canvas1.height);
+                ctx3.fillRect(box3X, 10, 100, 100);
             }
 
 
@@ -153,3 +192,4 @@
     </script>
 </body>
 </html>
+ 
