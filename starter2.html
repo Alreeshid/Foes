@@ -146,8 +146,6 @@
                 ctx.clearRect(0, 0, canvas2.width, canvas2.height);
                 box2X = 20;
             }
-
-
         }
 
         function animation3(){
@@ -176,19 +174,19 @@
                 //ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
 
                 ctx1.fillStyle = "red";
-                ctx1.fillRect(box1X, 10, boxWidth, boxHeight);
+                ctx1.fillRect(box1X, 10, boxWidth, boxHeight); //Values: X, Y, width, height - where X and Y are the top left corner of the shape.
             }
             
             if(animation2Running) {
-                box2X += 1;
+                box2X += 5;
 
                 ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
 
                 ctx2.fillStyle = "red";
                 ctx2.fillRect(box2X, 10, boxWidth, boxHeight);
 
-                if(box2X+boxWidth >= 720){
-                    box2X = 720;
+                if(box2X+boxWidth >= L){
+                    box2X = L;
                 }
             }
 
