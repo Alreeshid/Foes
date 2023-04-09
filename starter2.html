@@ -87,19 +87,29 @@
         let box1X = 20;
         let box2X = 20;
         let box3X = 20;
+        let box3Y = 10;
+
+        let boxWidth = 100;
+        let boxHeight = 100;
 
         let interval = setInterval(runAnimationFrames, 20);
 
-        /*
+      /*  
         window.addEventListener('keydown', function(e){
                     if(e.keyCode == 68){
-                        box3X += 2;
+                        box3X += 5;
                     }
                     if(e.keyCode == 65){
-                        box3X -= 2;
+                        box3X -= 5;
+                    }
+                    if(e.keyCode == 87){
+                        box3Y -= 5;
+                    }
+                    if(e.keyCode == 83){
+                        box3Y += 5;
                     }
                 })
-                */
+             */   
 
         function animation1(){
             var ctx = canvas1.getContext("2d");
@@ -109,7 +119,7 @@
                 
 
                 ctx.fillStyle = "red";
-                ctx.fillRect(box1X, 10, 100, 100);
+                ctx.fillRect(box1X, 10, boxWidth, boxHeight);
                 
             }
             else{
@@ -129,7 +139,7 @@
                 
 
                 ctx.fillStyle = "red";
-                ctx.fillRect(box2X, 10, 100, 100);
+                ctx.fillRect(box2X, 10, boxWidth, boxHeight);
             }
             else{
                 animation2Running = false;
@@ -148,7 +158,7 @@
                 
 
                 ctx.fillStyle = "red";
-                ctx.fillRect(box3X, 10, 100, 100);
+                ctx.fillRect(box3X, box3Y, boxWidth, boxHeight);
             }
             else{
                 animation3Running = false;
@@ -161,30 +171,45 @@
         function runAnimationFrames(){
 
             if(animation1Running) {
-                //box1X += 1;
+                box1X += L;
+
                 //ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+
                 ctx1.fillStyle = "red";
-                ctx1.fillRect(box1X, 10, 100, 100);
+                ctx1.fillRect(box1X, 10, boxWidth, boxHeight);
             }
             
             if(animation2Running) {
                 box2X += 1;
-                ctx2.clearRect(0, 0, canvas1.width, canvas1.height);
+
+                ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
                 ctx2.fillStyle = "red";
-                ctx2.fillRect(box2X, 10, 100, 100);
-                //if(box2X >= 720){
-                //    box2X = 720;
-                //}
+                ctx2.fillRect(box2X, 10, boxWidth, boxHeight);
+
+                if(box2X+boxWidth >= 720){
+                    box2X = 720;
+                }
             }
 
             if(animation3Running) {
                 
                 ctx3.fillStyle = "red";
-                if(box3X >= 620){
-                    box3X = 620;
+                if(box3X+boxWidth >= 720){
+                    box3X = 720-boxWidth;
                 }
-                ctx3.clearRect(0, 0, canvas1.width, canvas1.height);
-                ctx3.fillRect(box3X, 10, 100, 100);
+                else if(box3X <= 0){
+                    box3X = 0;
+                }
+                if(box3Y+boxHeight >= canvas3.height){
+                    box3Y = canvas3.height-boxHeight;
+                }
+                else if(box3Y <= 0){
+                    box3Y = 0;
+                }
+                ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+
+                ctx3.fillRect(box3X, box3Y, boxWidth, boxHeight);
             }
 
 
