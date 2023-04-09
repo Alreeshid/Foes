@@ -83,32 +83,55 @@
         let interval = setInterval(runAnimationFrames, 20);
 
         function animation1(){
-            animation1Running = true;
             var ctx = canvas1.getContext("2d");
 
-            ctx.fillStyle = "red";
-            ctx.fillRect(20, 10, 100, 100);
+            if(!animation1Running){
+                animation1Running = true;
+                
+
+                ctx.fillStyle = "red";
+                ctx.fillRect(20, 10, 100, 100);
+            }
+            else{
+                animation1Running = false;
+                ctx.clearRect(0, 0, canvas1.width, canvas1.height);
+            }
 
 
         }
 
         function animation2(){
-            animation2Running = true;
             var ctx = canvas2.getContext("2d");
 
-            ctx.fillStyle = "red";
-            ctx.fillRect(20, 10, 100, 100);
+            if(!animation2Running){
+                animation2Running = true;
+                
+
+                ctx.fillStyle = "red";
+                ctx.fillRect(20, 10, 100, 100);
+            }
+            else{
+                animation2Running = false;
+                ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+            }
 
 
         }
 
         function animation3(){
-            animation3Running = true;
             var ctx = canvas3.getContext("2d");
 
-            ctx.fillStyle = "red";
-            ctx.fillRect(20, 10, 100, 100);
+            if(!animation3Running){
+                animation3Running = true;
+                
 
+                ctx.fillStyle = "red";
+                ctx.fillRect(20, 10, 100, 100);
+            }
+            else{
+                animation3Running = false;
+                ctx.clearRect(0, 0, canvas3.width, canvas3.height);
+            }
 
         }
 
@@ -120,7 +143,7 @@
             if(animation2Running) {
 
             }
-            
+
             if(animation3Running) {
 
             }
