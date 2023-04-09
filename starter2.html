@@ -199,11 +199,11 @@
                 else if(box3X <= 0){
                     box3X = 0;
                 }
-                if(box3Y+boxHeight >= canvas3.height){
-                    box3Y = canvas3.height-boxHeight;
+                if(box3Y+boxHeight >= L){
+                    box3Y = L;
                 }
-                else if(box3Y <= 0){
-                    box3Y = 0;
+                else if(box3Y <= L){
+                    box3Y = L;
                 }
                 ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
 
