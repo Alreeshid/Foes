@@ -76,8 +76,14 @@
         let canvas2 = document.getElementById("canvas2");
         let canvas3 = document.getElementById("canvas3");
 
+        let animation1Running = false;
+        let animation2Running = false;
+        let animation3Running = false;
+
+        let interval = setInterval(runAnimationFrames, 20);
+
         function animation1(){
-            let animation1Running = true;
+            animation1Running = true;
             var ctx = canvas1.getContext("2d");
 
             ctx.fillStyle = "red";
@@ -87,7 +93,7 @@
         }
 
         function animation2(){
-            let animation2Running = true;
+            animation2Running = true;
             var ctx = canvas2.getContext("2d");
 
             ctx.fillStyle = "red";
@@ -97,7 +103,7 @@
         }
 
         function animation3(){
-            let animation3Running = true;
+            animation3Running = true;
             var ctx = canvas3.getContext("2d");
 
             ctx.fillStyle = "red";
@@ -107,6 +113,18 @@
         }
 
         function runAnimationFrames(canvas){
+            if(animation1Running) {
+
+            }
+            
+            if(animation2Running) {
+
+            }
+            
+            if(animation3Running) {
+
+            }
+
 
         }
     </script>
