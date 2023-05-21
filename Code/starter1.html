@@ -2,8 +2,12 @@
 <html>
 <head>
     <style>
-        body{/*Default color values start at Ivory in order to make them
-            blend in with the body.*/
+        body{
+            /*
+            Here are some colors to potentially use for the background color: 
+            Ivory
+
+            */
             background-color: limegreen;
             background-image: url("");
             background-repeat: no-repeat;
@@ -45,22 +49,19 @@
         }
     </style>
 </head>
-<body onload="startScreen()">
+<body onload = "styleTime()">
     <div id="banner">
         <h1 id="header">Something Something Clever Page Title</h1>
 
         <div id = "buttons">
-            <button onclick="bodyCol()">Change The Main Background Image</button>
-            <button onclick="bodyBord()">Change Border Color</button>
-            <button onclick="bodyImg()">Change The Main Background Image</button>
-            <button onclick="bodyCol()">Change The Main Background Image</button>
+            <button onclick="bodyText()">Change The Below Text</button>
         </div>
         <div id="mainText">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-             <span>graphic Design Is My Passion :)</span>
+             <span id="smallText">graphic Design Is My Passion :)</span>
              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
@@ -69,16 +70,20 @@
         <br><hr><br>
         <div class="divCenter">
             <img id="image" src="https://i.kym-cdn.com/entries/icons/mobile/000/018/929/graphic_design_is_my_passion.jpg">
-            Here is my very serious image yes.
+            Here is my very serious image yes. &#9977;
         </div>
 
-</div>
+    </div>
+
     <script>
         //Variables To Be Used:
-        let body = document.body;//this saves me from writing document.body every time i target it
-        //, unnecessary but convenient.
+        let body = document.body;
+        //this saves me from writing document.body every time i target it,
+        //  unnecessary but convenient.
         let wrapper = document.getElementById("banner");
         let header = document.getElementById("header");
+        let text = document.getElementById("mainText");
+
 
         //This is a list of various backgrounds you can use for the activity. If you wish to use them,
         //  then you will be required to set the body.style.backgroundImage's value to the variable name,
@@ -86,11 +91,29 @@
         // Example: body.style.backgroundImage = rainBG;
 
         let rainBG = "url('https://i.pinimg.com/originals/6f/b9/68/6fb968d062567bde0917bec7d12fe8b4.gif')";
-        let cityScape = "url('https://wallpaperaccess.com/full/2825722.gif')"
+        let cityScape = "url('https://wallpaperaccess.com/full/2825722.gif')";
+        let snowyCity = "url('https://media.tenor.com/jLBoL_qDaVQAAAAd/lennsan.gif')";
 
-        function bodyImg(){
-            body.style.backgroundImage = rainBG;
+        function styleTime(){
+           // /*
+
+            wrapper.style.backgroundColor = "";
+
+            wrapper.style.border = ""; //Criteria: size(2px), style(solid, dashed, dotted, double, grooved, etc), and color. example:
+            // wrapper.style.border = "5px ridge lime";
+
+            
+
+            body.style.backgroundImage = "url()";
+
+           // */
         }
+
+
+        function bodyText(){
+            text.innerHTML = "Bababooey.";
+        }
+
     </script>
 </body>
 </html>
