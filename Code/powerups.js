@@ -60,6 +60,13 @@ const powerupList = [
         effect: function(player){
             player.spearHeight += 10;
         }
+    },
+    {
+        name: "Teleport Down",
+        description: "While in the air, teleport to the round when you press down",
+        effect: function(player){//needs to have its own function that only unlocks if the player presses down AND has the powerup <3
+            player.y = player.originalY;
+        }
     }
 ];
 
