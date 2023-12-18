@@ -76,6 +76,13 @@ table, tr, td{
 #jumpBar2{
 
 }
+#P1stats{
+margin-top: -400px;
+}
+#P2stats{
+margin-left: 1500px;
+margin-top: -60px;
+}
 </style>
 </head>
 <body onload="startScreen()">
@@ -88,12 +95,28 @@ table, tr, td{
 </div>
 <br>
 <div id="canvasContainer"></div>
-<br><br><br><br><br><br><br>
+<table id = "P1stats">
+<tr>
+    <th>Player 1: W A D for Movement, V To Shoot</th>
+</tr>
+<tr>
+    <th> Player 1 stats: </th>
+</tr>
+</table>
+<table id = "P2stats">
+    <tr>
+        <th>Player 2: Arrow Keys to move, / To Shoot</th>
+    </tr>
+    <tr>
+        <th> Player 2 stats: </th>
+    </tr>
+</table>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div id="descripAndControl">
-    <p id="control1">Player 1: W A D for Movement, V To Shoot</p>
-    <p id="control2">Player 2: Arrow Keys for Movement, <span id="slash">/</span> To Shoot</p>
+    
     <br><br>
     <p id="description">
+        <br>
         'Foes' is a game developed by GGC students Alex Shaklee and Alec Burns as part of STEC 4800's(Internship in Service Learning) Technology Ambassador's Program.
         <br><br>
         When a player <b>loses</b> a round, they gain the opportunity to choose a powerup to help them in future rounds. As such, this game is intended to drift back and forth, and become a best of 5 Tug of War.
