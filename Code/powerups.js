@@ -5,6 +5,7 @@ function powerup(name, description, effect){
     this.description = description; //The description of the powerup, a longer string than name
 
     this.effect = effect; //ideally, this will be a function passed into the object as a parameter, which will then be used in the array of objects
+    this.stackable = Boolean;
 }
 
 const powerupList = [
@@ -14,14 +15,16 @@ const powerupList = [
         effect: function(player){
             player.maxHealth += 1;
             player.currentHealth += 1;
-        }
+        },
+        stackable: true
     },
     {
         name: "Quiver-Up",
         description: "Increase your maximum quiver size by 1",
         effect: function(player){
             player.quiverMax += 1;
-        }
+        },
+        stackable: true
     },
     {
         name: "Jump Pack",
@@ -29,14 +32,16 @@ const powerupList = [
         effect: function(player){
             player.jumpAmount += 1;
             player.storedJumpAmount += 1;
-        }
+        },
+        stackable: true
     },
     {
         name: "Faster Spear",
         description: "Increases the speed of your projectiles",
         effect: function(player){
             player.shootSpeed += 5;
-        }
+        },
+        stackable: true
     },
     {
         name: "Slower Spear",
@@ -52,28 +57,32 @@ const powerupList = [
                 player1.shootSpeed = 5;
             else 
             player1.shootSpeed -= 4;
-        }
+        },
+        stackable: true
     },
     {
         name: "Bigger Spear",
         description: "Increases the size of your projectile",
         effect: function(player){
             player.spearHeight += 10;
-        }
+        },
+        stackable: true
     },
     {
         name: "Speed-Up",
         description: "Increases movement speed.",
         effect: function(player){//needs to have its own function that only unlocks if the player presses down AND has the powerup <3
             player.baseMoveSpeed++;
-        }
+        },
+        stackable: true
     },
     {
         name: "Teleport Down",
         description: "While in the air, teleport to the round when you press down",
         effect: function(player){//needs to have its own function that only unlocks if the player presses down AND has the powerup <3
             player.y = player.originalY;
-        }
+        },
+        stackable: false
     }
 ];
 
