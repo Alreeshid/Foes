@@ -127,6 +127,9 @@ table, tr, td{
     let p1Win = 0;
     let p2Win = 0;
 
+    //let baseMoveSpeedP1 = 2;
+    //let baseMoveSpeedP2 = 2;
+
     function startScreen(){
         myGameArea.start();
         graphicArea.start();
@@ -473,6 +476,8 @@ table, tr, td{
         this.quiver = new Array();
         this.quiverMax = 3;
 
+        this.baseMoveSpeed = 2;
+
         //This boolean is for the
         this.hasNotHitPlayer = true;
 
@@ -647,11 +652,11 @@ table, tr, td{
             player2.speedX = 0;
             player2.speedY = 0; 
             //player 1 movement
-            if ((myGameArea.keys && myGameArea.keys[65]) && player1.x != 8 && playerMovement) {player1.speedX = -2; }
-            if ((myGameArea.keys && myGameArea.keys[68]) && player1.x != playAreaSize+8 && playerMovement) {player1.speedX = 2; }
+            if ((myGameArea.keys && myGameArea.keys[65]) && player1.x > 8 && playerMovement) {player1.speedX = -player1.baseMoveSpeed; }
+            if ((myGameArea.keys && myGameArea.keys[68]) && player1.x < playAreaSize+8 && playerMovement) {player1.speedX = player1.baseMoveSpeed; }
             //player 2 movement
-            if ((myGameArea.keys && myGameArea.keys[37]) && player2.x != myGameArea.canvas.width-playAreaSize-48 && playerMovement) {player2.speedX = -2;}
-            if ((myGameArea.keys && myGameArea.keys[39]) && player2.x != myGameArea.canvas.width-48 && playerMovement) {player2.speedX = 2; }
+            if ((myGameArea.keys && myGameArea.keys[37]) && player2.x > myGameArea.canvas.width-playAreaSize-48 && playerMovement) {player2.speedX = -player2.baseMoveSpeed;}
+            if ((myGameArea.keys && myGameArea.keys[39]) && player2.x < myGameArea.canvas.width-48 && playerMovement) {player2.speedX = player2.baseMoveSpeed; }
             
             //player 1 spear function
             //if(myGameArea.keys && myGameArea.keys[90])
