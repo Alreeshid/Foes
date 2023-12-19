@@ -135,6 +135,12 @@ text-align: center;
         }
     }, false);
 
+    window.addEventListener("keydown", function(e) {
+        if([193].indexOf(e.code) > -1) {
+            e.preventDefault();
+        }
+    }, false);
+
     let roundOngoing = false;
 
     var player1;
