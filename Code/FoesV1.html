@@ -130,16 +130,12 @@ text-align: center;
 <script>
     //This event listener prevents the screen from moving when you press arrow keys
     window.addEventListener("keydown", function(e) {
-        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ForwardSlash"].indexOf(e.code) > -1) {
             e.preventDefault();
         }
     }, false);
 
-    window.addEventListener("keydown", function(e) {
-        if([193].indexOf(e.code) > -1) {
-            e.preventDefault();
-        }
-    }, false);
+
 
     let roundOngoing = false;
 
