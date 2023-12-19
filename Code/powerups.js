@@ -6,6 +6,8 @@ function powerup(name, description, effect){
 
     this.effect = effect; //ideally, this will be a function passed into the object as a parameter, which will then be used in the array of objects
     this.stackable = Boolean;
+    this.p1Has = false;
+    this.p2Has = false;
 }
 
 const powerupList = [
@@ -17,6 +19,7 @@ const powerupList = [
             player.currentHealth += 1;
         },
         stackable: true
+        
     },
     {
         name: "Quiver-Up",
@@ -80,7 +83,12 @@ const powerupList = [
         name: "Teleport Down",
         description: "While in the air, teleport to the round when you press down",
         effect: function(player){//needs to have its own function that only unlocks if the player presses down AND has the powerup <3
-            player.y = player.originalY;
+            //player.y = player.originalY;
+            if(player.name == 'player1'){
+                this.p1Has == true;
+            }
+            else
+                this.p2Has == true;
         },
         stackable: false
     }

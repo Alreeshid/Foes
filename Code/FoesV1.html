@@ -459,7 +459,17 @@ text-align: center;
 
     function getRandomNumber1(){
         var rand1 = Math.floor(Math.random() * powerupList.length);
+
+        if(powerupList[rand1].stackable)
             return rand1;
+
+            else if(powerupList[rand1].p1Has && loser.name == 'player1')
+                getRandomNumber2(rand1);
+
+            else if(powerupList[rand1].p2Has && loser.name == 'player2')
+                getRandomNumber2(rand1);
+            else
+                return rand1;
     }
 
     function getRandomNumber2(random1){
@@ -467,8 +477,16 @@ text-align: center;
 
                 while(rand2 == random1){
                     rand2 = Math.floor(Math.random() * powerupList.length);
-                }    
-                return rand2;  
+                } 
+                if(powerupList[rand2].stackable)
+                    return rand2;
+                else if(powerupList[rand2].p1Has && loser.name == 'player1')
+                    getRandomNumber2(rand2); 
+                else if(powerupList[rand2].p2Has && loser.name == 'player2')
+                    getRandomNumber2(rand2);     
+                else
+                    return rand2;
+                //return rand2;  
     }
 
     function component(width, height, color, x, y, id) {
